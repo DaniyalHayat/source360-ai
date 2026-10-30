@@ -4,7 +4,7 @@ An auditable procurement decision platform, from messy source extracts to a cons
 
 The recruiter demo includes a guided three-minute tour, spend diagnostics, supplier scorecards, a working sourcing optimizer, three-strategy comparison, cost forecasts, source evidence, and financial controls. No account or installation is required for the public demo.
 
-[Published Figma app](https://tweak-cushy-94192841.figma.site) · [Figma Make project](https://www.figma.com/make/g4nmNDF2hjBYTc3s76I4lD)
+[Published Figma app](https://tweak-cushy-94192841.figma.site) · [Figma Make project](https://www.figma.com/make/g4nmNDF2hjBYTc3s76I4lD) · [GitHub source](https://github.com/DaniyalHayat/source360-ai)
 
 ![Published Source360 recruiter cockpit](docs/screenshots/source360-figma-published.jpg)
 
