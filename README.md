@@ -1,4 +1,4 @@
-# Source360 AI
+# Source360 
 
 An  procurement decision platform, from messy source extracts to a constrained supplier award. Built by Daniyal Hayat. **All records, contracts, prices, and savings are synthetic. No realized client impact is claimed.**
 
