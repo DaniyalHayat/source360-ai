@@ -1,12 +1,12 @@
 # Source360 AI
 
-An auditable procurement decision platform, from messy source extracts to a constrained supplier award. Built by Daniyal Hayat. **All records, contracts, prices, and savings are synthetic. No realized client impact is claimed.**
+An  procurement decision platform, from messy source extracts to a constrained supplier award. Built by Daniyal Hayat. **All records, contracts, prices, and savings are synthetic. No realized client impact is claimed.**
 
-The recruiter demo includes a guided three-minute tour, spend diagnostics, supplier scorecards, a working sourcing optimizer, three-strategy comparison, cost forecasts, source evidence, and financial controls. No account or installation is required for the public demo.
+The demo includes a guided three-minute tour, spend diagnostics, supplier scorecards, a working sourcing optimizer, three-strategy comparison, cost forecasts, source evidence, and financial controls. No account or installation is required for the public demo.
 
-[Published Figma app](https://tweak-cushy-94192841.figma.site) · [Figma Make project](https://www.figma.com/make/g4nmNDF2hjBYTc3s76I4lD) · [GitHub source](https://github.com/DaniyalHayat/source360-ai)
+[Published Figma app](https://procurement-strategic-intelligence-daniyalhayat.figma.site) · [GitHub source](https://github.com/DaniyalHayat/source360-ai)
 
-![Published Source360 recruiter cockpit](docs/screenshots/source360-figma-published.jpg)
+![Published Source360 Overview](docs/screenshots/source360-figma-published.jpg)
 
 ## Open the application
 
@@ -76,4 +76,4 @@ Use **3-minute recruiter tour** in the top bar. Review source reconciliation, ru
 
 ## Boundaries
 
-Figma and the public browser app are the recruiter-facing presentation surfaces. The local API supports new AI questions after installing `requirements-extensions.txt`; first use downloads the model weights. Airflow was executed as a real three-task DAG test, not left as an always-running scheduler. PySpark was executed locally, not on a hosted Databricks cluster. AWS verification deployed disposable private S3 resources and removed them; it does not host the public application. No external supplier communications or award actions exist. See `docs/verification.md` for execution receipts and reproduction commands.
+Figma and the public browser app are the presentation surfaces. The local API supports new AI questions after installing `requirements-extensions.txt`; first use downloads the model weights. Airflow was executed as a real three-task DAG test, not left as an always-running scheduler. PySpark was executed locally, not on a hosted Databricks cluster. AWS verification deployed disposable private S3 resources and removed them; it does not host the public application. No external supplier communications or award actions exist. See `docs/verification.md` for execution receipts and reproduction commands.
