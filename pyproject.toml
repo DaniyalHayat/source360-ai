@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "source360-ai"
+version = "1.0.0"
+description = "Auditable synthetic procurement decision intelligence"
+requires-python = ">=3.11,<3.14"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "pandas>=2.2,<4", "numpy>=2,<3", "SQLAlchemy>=2,<3", "psycopg[binary]>=3.2,<4", "pulp>=3,<5", "scipy>=1.14,<2", "statsmodels>=0.14,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.27,<1", "ruff>=0.9", "dbt-postgres>=1.9,<2"]
+mcp = ["mcp>=1.9,<2"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["source360*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

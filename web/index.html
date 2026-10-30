@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Source360 | Procurement intelligence</title>
+  <meta name="description" content="An auditable procurement sourcing cockpit built on reproducible synthetic data.">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/recruiter.css">
+  <script src="/static/app.js" defer></script>
+  <script src="/static/recruiter.js" defer></script>
+</head>
+<body>
+<aside class="sidebar">
+  <a href="#overview" class="brand"><span class="brand-mark">S<span>360</span></span><div>Source360<span class="brand-sub">DECISION INTELLIGENCE</span></div></a>
+  <div class="workspace"><span class="workspace-icon">S</span><div>Strategic sourcing<span>Synthetic enterprise workspace</span></div></div>
+  <p class="nav-label">WORKSPACE</p>
+  <nav aria-label="Main navigation">
+    <button data-view="overview" class="active"><span>◫</span>Executive overview</button>
+    <button data-view="spend"><span>▥</span>Spend intelligence</button>
+    <button data-view="suppliers"><span>◎</span>Supplier 360</button>
+    <button data-view="sourcing"><span>⇄</span>Sourcing workbench<span class="nav-count">25</span></button>
+    <button data-view="forecast"><span>⌁</span>Cost outlook</button>
+    <button data-view="evidence"><span>▤</span>Contract evidence</button>
+    <button data-view="quality"><span>◇</span>Data & controls</button>
+  </nav>
+  <div class="sidebar-bottom"><span class="status-dot"></span>Local decision engine<div>All data and outcomes are simulated</div><a href="/docs" target="_blank" rel="noopener">API reference ↗</a></div>
+</aside>
+<div class="main-shell">
+  <header class="topbar"><span>Workspace <span class="breadcrumb">/</span> <strong id="breadcrumb">Executive overview</strong></span><div><button id="recruiter-tour" class="text-link">▷ 3-minute recruiter tour</button><span class="demo-badge">SYNTHETIC DEMO</span><span class="avatar">DH</span></div></header>
+  <main>
+    <div class="page-heading"><div><p class="eyebrow">PROCUREMENT / DECISION INTELLIGENCE</p><h1 id="page-title">A clearer view. A stronger sourcing decision.</h1><p id="page-subtitle">From fragmented spend to an evidence-backed supplier recommendation.</p></div><button id="export-btn" class="button secondary">↓ Export data</button></div>
+    <div class="filterbar"><label>Category <select id="category-filter"><option value="">All categories</option></select></label><span class="period-label">◷ Historical snapshot · Oct 30, 2026</span><span class="filter-note">USD · nominal values</span></div>
+    <div id="error" class="error" role="alert" hidden></div>
+    <section id="content" aria-live="polite"><div class="loading">Loading the decision workspace…</div></section>
+    <footer>Source360 AI <span>Reproducible synthetic data · Decision support · Human approval required</span></footer>
+  </main>
+</div>
+<dialog id="detail-dialog"><div class="dialog-head"><h2 id="dialog-title">Details</h2><button id="close-dialog" class="icon-button" aria-label="Close details">×</button></div><div id="dialog-body"></div></dialog>
+</body></html>

@@ -1,0 +1,12 @@
+source360:
+  target: local
+  outputs:
+    local:
+      type: postgres
+      host: "{{ env_var('DBT_HOST', 'localhost') }}"
+      port: 5432
+      user: "{{ env_var('DBT_USER', 'source360') }}"
+      password: "{{ env_var('DBT_PASSWORD', 'local_demo_only') }}"
+      dbname: source360
+      schema: analytics
+      threads: 2

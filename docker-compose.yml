@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: source360
+      POSTGRES_PASSWORD: local_demo_only
+      POSTGRES_DB: source360
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U source360"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  pipeline:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://source360:local_demo_only@db:5432/source360
+      DBT_HOST: db
+      DBT_SEND_ANONYMOUS_USAGE_STATS: "false"
+    volumes: ["./data:/app/data"]
+    depends_on:
+      db: {condition: service_healthy}
+    command: ["sh", "-c", "python -m source360.generate --rows 100000 && python -m source360.pipeline && dbt build --project-dir dbt --profiles-dir dbt"]
+  app:
+    build: .
+    ports: ["127.0.0.1:8765:8765"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://source360:local_demo_only@db:5432/source360
+      SOURCE360_DBT_MARTS: "1"
+    depends_on:
+      pipeline: {condition: service_completed_successfully}
+volumes:
+  postgres-data:

@@ -1,0 +1,5 @@
+Total Spend = SUM(fct_spend[extended_spend_usd])
+Off Contract Exposure = CALCULATE([Total Spend], fct_spend[off_contract_flag] = 1)
+On Time Rate = DIVIDE(SUM(fct_spend[on_time]), SUM(fct_spend[delivery_observed]))
+Active Suppliers = DISTINCTCOUNT(fct_spend[supplier_id])
+Price Anomaly Exposure = CALCULATE([Total Spend], fct_spend[price_anomaly] = 1)

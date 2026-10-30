@@ -1,0 +1,9 @@
+name: source360
+version: '1.0.0'
+config-version: 2
+profile: source360
+model-paths: [models]
+test-paths: [tests]
+models:
+  source360:
+    +materialized: table
