@@ -4,6 +4,10 @@ An auditable procurement decision platform, from messy source extracts to a cons
 
 The recruiter demo includes a guided three-minute tour, spend diagnostics, supplier scorecards, a working sourcing optimizer, three-strategy comparison, cost forecasts, source evidence, and financial controls. No account or installation is required for the public demo.
 
+[Published Figma app](https://tweak-cushy-94192841.figma.site) · [Figma Make project](https://www.figma.com/make/g4nmNDF2hjBYTc3s76I4lD)
+
+![Published Source360 recruiter cockpit](docs/screenshots/source360-figma-published.jpg)
+
 ## Open the application
 
 Double-click **Start Source360.cmd** on Windows. This starts the local FastAPI application at `http://127.0.0.1:8765`. Keep the launch window open. Python 3.11-3.13 is required on a fresh machine; first-time dependency installation requires internet access. The supplied local dataset also works offline after installation.
@@ -59,7 +63,7 @@ flowchart LR
   API --> Web[Decision cockpit]
   Solver --> Web
   API --> Snapshot[Validated synthetic browser snapshot]
-  Snapshot --> Public[Public app / runnable Figma code layer]
+  Snapshot --> Public[Public app / standalone Figma Make app]
 ```
 
 The static public edition carries the same validated data and decision equations without exposing a database or requiring a running laptop. It is a portfolio demonstration, not an operational procurement service. The backend uses SQLite for zero-setup local use and PostgreSQL with independently recomputed dbt marts in Compose. See [architecture](docs/architecture.md), [metrics](docs/metric_dictionary.md), [model cards](docs/model_cards.md), and [verification](docs/verification.md).

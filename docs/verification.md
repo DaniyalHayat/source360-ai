@@ -11,7 +11,7 @@ Executed on October 30, 2026. This is a technical portfolio demonstration using 
 | Forecast | Every category export checked; scaled least-squares ETS fitting, rolling baseline validation |
 | PostgreSQL/dbt | Docker image build, ingestion and dbt build executed; four models and ten data tests passed |
 | Public UX | Browser tour, sourcing scenario and strategy comparison checked; publication details tracked in delivery.json when available |
-| Figma | Runnable code-layer import tracked in delivery.json when available; editable native Design shapes are not claimed |
+| Figma | Standalone Figma Make app imported and running; supplier award executed in its preview. Publishing status is in the delivery receipt. Editable native Design shapes are not claimed |
 | Power BI | Query/measure/theme authoring kit only; native PBIX authoring/rendering not performed |
 | Airflow | Airflow 3 SDK DAG supplied; scheduler execution not verified |
 | MCP | Optional SDK adapter supplied; external client connection not verified |
