@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "kpi2",
+  "position": {
+    "x": 640,
+    "y": 20,
+    "z": 0,
+    "height": 150,
+    "width": 290,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Executive"
+                        }
+                      },
+                      "Property": "OffContract"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Executive.OffContract)",
+              "nativeQueryRef": "OffContract"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

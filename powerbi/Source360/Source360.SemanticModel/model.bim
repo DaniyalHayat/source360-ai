@@ -1,0 +1,326 @@
+{
+  "name": "Source360",
+  "compatibilityLevel": 1600,
+  "model": {
+    "culture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "tables": [
+      {
+        "name": "Categories",
+        "columns": [
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "Spend",
+            "dataType": "double",
+            "sourceColumn": "Spend",
+            "formatString": "#,0.00"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Categories",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [Category = text,Spend = number], {{\"IT Hardware\",133368872.844091},{\"Professional Services\",30319304.450221002},{\"Telecom\",24826243.231674},{\"Logistics\",21649399.114397},{\"Facilities\",16603290.108972},{\"Electronics\",13010470.839442},{\"MRO\",9003248.160035},{\"Raw Materials\",6452863.682379},{\"Office Supplies\",3522395.4496710002},{\"Packaging\",2622927.887179}}) in Source"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Monthly",
+        "columns": [
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month"
+          },
+          {
+            "name": "Spend",
+            "dataType": "double",
+            "sourceColumn": "Spend",
+            "formatString": "#,0.00"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Monthly",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [Month = text,Spend = number], {{\"2023-11-01\",7142277.364251001},{\"2023-12-01\",7232008.338671001},{\"2024-01-01\",7350752.937270001},{\"2024-02-01\",6679902.554248},{\"2024-03-01\",7106885.564012},{\"2024-04-01\",7190138.066020001},{\"2024-05-01\",7140908.208094},{\"2024-06-01\",7275855.383031},{\"2024-07-01\",7543986.096636},{\"2024-08-01\",7329609.749419},{\"2024-09-01\",6611269.619125},{\"2024-10-01\",7758033.191218},{\"2024-11-01\",7620821.643711001},{\"2024-12-01\",7108122.769765},{\"2025-01-01\",7742073.722055},{\"2025-02-01\",6545895.935468},{\"2025-03-01\",7196059.440958},{\"2025-04-01\",7249416.676888},{\"2025-05-01\",7456082.963939},{\"2025-06-01\",7249154.143031},{\"2025-07-01\",7584198.3957320005},{\"2025-08-01\",7719568.316809},{\"2025-09-01\",7189271.76072},{\"2025-10-01\",7863576.099006999},{\"2025-11-01\",7107802.151992},{\"2025-12-01\",7757162.098615},{\"2026-01-01\",7763514.523384},{\"2026-02-01\",7374213.744878001},{\"2026-03-01\",7156604.526627},{\"2026-04-01\",7812156.572093001},{\"2026-05-01\",7814295.098189},{\"2026-06-01\",7620096.218673},{\"2026-07-01\",7488064.076365},{\"2026-08-01\",7526636.295709},{\"2026-09-01\",7366198.766310001},{\"2026-10-01\",3706402.755148}}) in Source"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Suppliers",
+        "columns": [
+          {
+            "name": "Supplier",
+            "dataType": "string",
+            "sourceColumn": "Supplier"
+          },
+          {
+            "name": "Spend",
+            "dataType": "double",
+            "sourceColumn": "Spend",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "Risk",
+            "dataType": "double",
+            "sourceColumn": "Risk",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "OnTime",
+            "dataType": "double",
+            "sourceColumn": "OnTime",
+            "formatString": "0.0%"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Suppliers",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [Supplier = text,Spend = number,Risk = number,OnTime = number], {{\"Aster IT Hardware\",22374514.958367,34.72299587574153,0.5263157894736842},{\"Meridian IT Hardware\",22272663.599489,35.203141529131635,0.5646135265700483},{\"Northstar IT Hardware\",21722903.569096,38.61501766922717,0.5345252774352651},{\"Vertex IT Hardware\",22931567.528951,46.17743264293293,0.2713864306784661},{\"Cobalt IT Hardware\",22134082.754483,39.20783091184747,0.5404747413268411},{\"Summit IT Hardware\",21933140.433705002,33.209407844722186,0.5411622276029056},{\"Aster Packaging\",449448.582651,35.66124649579818,0.546865671641791},{\"Meridian Packaging\",426318.358388,36.16141036147605,0.54252017380509},{\"Northstar Packaging\",453123.900747,38.09359822265661,0.5329341317365269},{\"Vertex Packaging\",442063.731914,47.07863035870699,0.2688235294117647},{\"Cobalt Packaging\",423920.424667,39.49178840048671,0.5339987523393637},{\"Summit Packaging\",428052.888812,33.76460152223517,0.5334538878842676},{\"Aster Logistics\",3539552.384943,34.49776544736206,0.5507334963325183},{\"Meridian Logistics\",3709805.8377280002,35.68040774966075,0.5472665148063781},{\"Northstar Logistics\",3604902.363645,35.464809917801354,0.547800586510264},{\"Vertex Logistics\",3559201.720111,46.88571146801053,0.265906362545018},{\"Cobalt Logistics\",3610506.325444,39.2369739141506,0.5495601173020528},{\"Summit Logistics\",3625430.482526,31.906142469010895,0.564748201438849},{\"Aster MRO\",1571037.481004,34.66601391666087,0.560932944606414},{\"Meridian MRO\",1492653.75539,35.97347434202426,0.53836784409257},{\"Northstar MRO\",1496560.53279,36.98325541070591,0.5407362703681352},{\"Vertex MRO\",1489605.500456,47.335049377679205,0.263387297633873},{\"Cobalt MRO\",1467858.878401,38.83373801662772,0.5503731343283582},{\"Summit MRO\",1485532.011994,33.95391577014556,0.5322483423749247},{\"Aster Professional Services\",5035282.28631,34.4815450696261,0.5602879424115177},{\"Meridian Professional Services\",4802038.197375,35.41827321595862,0.5289308176100629},{\"Northstar Professional Services\",5001837.791243,37.05391260463223,0.5402873204247346},{\"Vertex Professional Services\",4979307.022872,45.70751497079794,0.2791277258566978},{\"Cobalt Professional Services\",5281735.055342,38.487296511077545,0.5599284436493739},{\"Summit Professional Services\",5219104.097079,35.076103235448045,0.519115890083632},{\"Aster Electronics\",2143394.415808,34.310588134114454,0.5432172869147659},{\"Meridian Electronics\",2179923.838641,35.70722354567138,0.5466983938132064},{\"Northstar Electronics\",2147006.876475,36.75088926881781,0.5452920143027413},{\"Vertex Electronics\",2198807.923087,47.24956511459802,0.25737898465171194},{\"Cobalt Electronics\",2163277.70132,39.02548709783722,0.5547445255474452},{\"Summit Electronics\",2178060.084111,33.84448545178577,0.5396270396270396},{\"Aster Facilities\",2851922.3914,34.528166191818286,0.5538461538461539},{\"Meridian Facilities\",2730307.340505,36.53025370892328,0.5387878787878788},{\"Northstar Facilities\",2704936.903887,37.040118554777166,0.5471813725490197},{\"Vertex Facilities\",2783180.571966,47.14822635413563,0.2669491525423729},{\"Cobalt Facilities\",2804735.343866,40.10379553159136,0.5392512077294686},{\"Summit Facilities\",2728207.557348,33.92463008860471,0.5418960244648318},{\"Aster Raw Materials\",1100540.058329,34.27026907359568,0.5576456310679612},{\"Meridian Raw Materials\",1090217.5921,36.65343949302706,0.52291917973462},{\"Northstar Raw Materials\",1082797.94447,36.69623633379028,0.5556915544675642},{\"Vertex Raw Materials\",1075103.123843,47.275767483672126,0.2587800369685767},{\"Cobalt Raw Materials\",1033754.8776690001,39.96064655397642,0.5290443472829481},{\"Summit Raw Materials\",1070450.085968,33.405748704634846,0.5607142857142857},{\"Aster Office Supplies\",608494.026542,35.728152335216784,0.5359628770301624},{\"Meridian Office Supplies\",577001.203859,36.18774583699701,0.530562347188264},{\"Northstar Office Supplies\",583852.949081,37.094282831504174,0.5476477683956574},{\"Vertex Office Supplies\",564521.522486,46.88063646806953,0.24722564734895192},{\"Cobalt Office Supplies\",601769.338672,38.73144345272519,0.5342706502636204},{\"Summit Office Supplies\",586756.409031,33.58760789762344,0.524330900243309},{\"Aster Telecom\",3996855.45434,34.712333172935494,0.537117903930131},{\"Meridian Telecom\",4255418.320113,36.26889014326059,0.5371462264150944},{\"Northstar Telecom\",4280116.521933,37.401146103500125,0.5582608695652174},{\"Vertex Telecom\",3983461.561572,46.68935527057791,0.2697929354445798},{\"Cobalt Telecom\",4239977.216492,39.32327769808847,0.5537918871252204},{\"Summit Telecom\",4070414.157224,33.27902361576437,0.5365408038976858}}) in Source"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Executive",
+        "columns": [
+          {
+            "name": "TotalSpend",
+            "dataType": "double",
+            "sourceColumn": "TotalSpend",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "AnnualSpend",
+            "dataType": "double",
+            "sourceColumn": "AnnualSpend",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "OffContract",
+            "dataType": "double",
+            "sourceColumn": "OffContract",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "OnTime",
+            "dataType": "double",
+            "sourceColumn": "OnTime",
+            "formatString": "0.0%"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Executive",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [TotalSpend = number,AnnualSpend = number,OffContract = number,OnTime = number], {{261379015.76806098,86493146.827983,51866618.886552006,0.49710035680184933}}) in Source"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Award",
+        "columns": [
+          {
+            "name": "Supplier",
+            "dataType": "string",
+            "sourceColumn": "Supplier"
+          },
+          {
+            "name": "Quantity",
+            "dataType": "double",
+            "sourceColumn": "Quantity",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "Share",
+            "dataType": "double",
+            "sourceColumn": "Share",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "CashCost",
+            "dataType": "double",
+            "sourceColumn": "CashCost",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "Risk",
+            "dataType": "double",
+            "sourceColumn": "Risk",
+            "formatString": "#,0.00"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Award",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [Supplier = text,Quantity = number,Share = number,CashCost = number,Risk = number], {{\"Aster IT Hardware\",3200.0,0.4,2606640.0,34.7229958757},{\"Northstar IT Hardware\",4800.0,0.6,3887030.0,38.6150176692}}) in Source"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Decision",
+        "columns": [
+          {
+            "name": "Baseline",
+            "dataType": "double",
+            "sourceColumn": "Baseline",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "CashCost",
+            "dataType": "double",
+            "sourceColumn": "CashCost",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "ModeledSavings",
+            "dataType": "double",
+            "sourceColumn": "ModeledSavings",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "SavingsRate",
+            "dataType": "double",
+            "sourceColumn": "SavingsRate",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "CostP10",
+            "dataType": "double",
+            "sourceColumn": "CostP10",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "CostP90",
+            "dataType": "double",
+            "sourceColumn": "CostP90",
+            "formatString": "#,0.00"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Decision",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [Baseline = number,CashCost = number,ModeledSavings = number,SavingsRate = number,CostP10 = number,CostP90 = number], {{7875200.0,6493670.0,1381530.0,0.17542792563998374,6212915.174318713,7304202.900582297}}) in Source"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Forecast",
+        "columns": [
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month"
+          },
+          {
+            "name": "ExpectedSpend",
+            "dataType": "double",
+            "sourceColumn": "ExpectedSpend",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "Low",
+            "dataType": "double",
+            "sourceColumn": "Low",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "High",
+            "dataType": "double",
+            "sourceColumn": "High",
+            "formatString": "#,0.00"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Forecast",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [Month = text,ExpectedSpend = number,Low = number,High = number], {{\"2026-11-01\",3711967.6006990816,2327823.341592678,5096111.859805485},{\"2026-12-01\",3712360.9352052016,1754885.3516960656,5669836.518714338},{\"2027-01-01\",3712754.269711322,1315346.08793425,6110162.451488394},{\"2027-02-01\",3713147.604217442,944859.0860046344,6481436.12243025},{\"2027-03-01\",3713540.9387235623,618500.2846955606,6808581.592751564},{\"2027-04-01\",3713934.2732296824,323487.1080163247,7104381.4384430405}}) in Source"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Controls",
+        "columns": [
+          {
+            "name": "check_name",
+            "dataType": "string",
+            "sourceColumn": "check_name"
+          },
+          {
+            "name": "passed",
+            "dataType": "double",
+            "sourceColumn": "passed",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "observed",
+            "dataType": "double",
+            "sourceColumn": "observed",
+            "formatString": "#,0.00"
+          },
+          {
+            "name": "threshold",
+            "dataType": "double",
+            "sourceColumn": "threshold",
+            "formatString": "#,0.00"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Controls",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let Source = #table(type table [check_name = text,passed = number,observed = number,threshold = number], {{\"financial_bridge\",1,4.97e-08,0.01},{\"row_bridge\",1,100000.0,100000.0},{\"po_key_unique\",1,0.0,0.0},{\"supplier_referential\",1,0.0,0.0},{\"invoice_deduplication\",1,425.0,0.0},{\"promised_date_completeness\",1,0.9967840827,0.99},{\"snapshot_freshness\",1,0.0,2.0}}) in Source"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

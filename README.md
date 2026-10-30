@@ -46,8 +46,10 @@ python -m uvicorn source360.api:app --host 127.0.0.1 --port 8765
 - Spend concentration, off-contract exposure, robust item-price anomalies, transparent supplier risk components and observed-delivery denominators.
 - Six-month nominal-spend forecast, ETS versus seasonal-naive model selection, six rolling one-step backtests and labeled illustrative prediction bands.
 - Capacity/concentration/source-count/qualification constrained supplier allocation, three presets, demand sensitivity API, 5,000-draw cost simulation, objective and cash-cost reconciliation, input hashes and review receipts.
-- Deterministic source-linked commercial-term extraction and a 50-field golden set. No language model, embeddings, or autonomous award authority are claimed.
-- FastAPI contract and exports; native web interface and shareable browser edition; PostgreSQL/dbt path; optional Airflow DAG, read-only MCP adapter and PySpark transform.
+- Source-linked commercial-term extraction with a 50-field golden set, plus MiniLM semantic retrieval and FLAN-T5 generation with exact source offsets and human review. Five local synthetic assistant questions passed retrieval and answer checks; this small benchmark does not establish production accuracy. Public pages replay these actual model runs; new questions run through the local API.
+- FastAPI contract and exports; native web interface and shareable browser edition; PostgreSQL/dbt path; executed Airflow DAG, four-tool MCP client integration and local PySpark parity verification.
+- Native Power BI project with embedded synthetic data, reproducible report generation, supplier performance, sourcing allocation, forecast and financial-control pages.
+- Real AWS S3 upload/download verification in us-east-2 with encryption, public-access blocking, versioning, checksum validation and confirmed cleanup. CloudFormation template and verification script are included.
 
 ## Architecture
 
@@ -74,4 +76,4 @@ Use **3-minute recruiter tour** in the top bar. Review source reconciliation, ru
 
 ## Boundaries
 
-The user requested Figma and recruiter-facing publication as the main presentation surface. `powerbi/` therefore contains an import/query/measure/theme authoring kit; no native `.pbix` is claimed. AWS S3 is an optional architecture deployment, not a billing or credential dependency. Airflow/MCP/PySpark extension verification is explicitly tracked in `docs/verification.md`. No external supplier communications or award actions exist.
+Figma and the public browser app are the recruiter-facing presentation surfaces. The local API supports new AI questions after installing `requirements-extensions.txt`; first use downloads the model weights. Airflow was executed as a real three-task DAG test, not left as an always-running scheduler. PySpark was executed locally, not on a hosted Databricks cluster. AWS verification deployed disposable private S3 resources and removed them; it does not host the public application. No external supplier communications or award actions exist. See `docs/verification.md` for execution receipts and reproduction commands.

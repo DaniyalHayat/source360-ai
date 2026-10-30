@@ -1,0 +1,9 @@
+{
+  "spark_version": "4.2.1",
+  "master": "local[2]",
+  "raw_rows": 100000,
+  "published_rows": 99816,
+  "spend_usd": 261379015.76805878,
+  "python_parity": true,
+  "distributed_cloud_execution": false
+}

@@ -1,0 +1,14 @@
+{
+  "region": "us-east-2",
+  "stack": "source360-synthetic-verification",
+  "synthetic_only": true,
+  "maximum_budget_usd": 5,
+  "budget_is_not_a_hard_billing_cap": true,
+  "upload_download_sha256_verified": true,
+  "encryption_verified": true,
+  "public_access_block_verified": true,
+  "versioning": "Enabled",
+  "uploaded_bytes": 851,
+  "account_identity_verified": true,
+  "stack_cleanup_verified": true
+}

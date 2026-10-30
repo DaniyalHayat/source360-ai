@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "totals",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 0,
+    "height": 660,
+    "width": 1240,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Controls"
+                    }
+                  },
+                  "Property": "check_name"
+                }
+              },
+              "queryRef": "Controls.check_name",
+              "nativeQueryRef": "check_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Controls"
+                    }
+                  },
+                  "Property": "passed"
+                }
+              },
+              "queryRef": "Controls.passed",
+              "nativeQueryRef": "passed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Controls"
+                    }
+                  },
+                  "Property": "observed"
+                }
+              },
+              "queryRef": "Controls.observed",
+              "nativeQueryRef": "observed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Controls"
+                    }
+                  },
+                  "Property": "threshold"
+                }
+              },
+              "queryRef": "Controls.threshold",
+              "nativeQueryRef": "threshold"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,1 @@
+{"transport":"stdio","client":"MCP Python SDK ClientSession","initialization":"success","calls":[{"tool":"get_category_spend","passed":true},{"tool":"get_supplier_scorecard","passed":true},{"tool":"get_rfq_bid_matrix","passed":true},{"tool":"get_contract_evidence","passed":true}],"read_only":true}

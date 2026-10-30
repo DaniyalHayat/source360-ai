@@ -1,0 +1,255 @@
+{
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "generator": "google/flan-t5-small",
+  "cases": 5,
+  "retrieval_hits": 5,
+  "answer_hits": 5,
+  "results": [
+    {
+      "question": "What are the payment terms?",
+      "expected": "30",
+      "retrieval_pass": true,
+      "answer_pass": true,
+      "response": {
+        "answer": "30 days",
+        "evidence": [
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Payment terms: 30 days.",
+            "start": 49,
+            "end": 72,
+            "retrieval_score": 0.7259015440940857
+          },
+          {
+            "source_id": "CTR-001-2",
+            "supplier_id": 1,
+            "text": "Payment terms: 45 days.",
+            "start": 49,
+            "end": 72,
+            "retrieval_score": 0.6967038512229919
+          },
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Currency: USD.",
+            "start": 93,
+            "end": 107,
+            "retrieval_score": 0.31946492195129395
+          }
+        ],
+        "cited_source": {
+          "source_id": "CTR-001-1",
+          "supplier_id": 1,
+          "text": "Payment terms: 30 days.",
+          "start": 49,
+          "end": 72,
+          "retrieval_score": 0.7259015440940857
+        },
+        "model": "google/flan-t5-small",
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "review_required": true,
+        "unsupported_numeric_tokens": [],
+        "validation_status": "human_review_required",
+        "limitations": "Retrieval similarity is not confidence. Numeric grounding does not establish semantic correctness. No financial calculations or awards are delegated to this model."
+      }
+    },
+    {
+      "question": "What is the delivery lead time?",
+      "expected": "21",
+      "retrieval_pass": true,
+      "answer_pass": true,
+      "response": {
+        "answer": "21 days",
+        "evidence": [
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Lead time: 21 days.",
+            "start": 73,
+            "end": 92,
+            "retrieval_score": 0.6022813320159912
+          },
+          {
+            "source_id": "CTR-001-2",
+            "supplier_id": 1,
+            "text": "Lead time: 28 days.",
+            "start": 73,
+            "end": 92,
+            "retrieval_score": 0.5860143899917603
+          },
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Payment terms: 30 days.",
+            "start": 49,
+            "end": 72,
+            "retrieval_score": 0.28798621892929077
+          }
+        ],
+        "cited_source": {
+          "source_id": "CTR-001-1",
+          "supplier_id": 1,
+          "text": "Lead time: 21 days.",
+          "start": 73,
+          "end": 92,
+          "retrieval_score": 0.6022813320159912
+        },
+        "model": "google/flan-t5-small",
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "review_required": true,
+        "unsupported_numeric_tokens": [],
+        "validation_status": "human_review_required",
+        "limitations": "Retrieval similarity is not confidence. Numeric grounding does not establish semantic correctness. No financial calculations or awards are delegated to this model."
+      }
+    },
+    {
+      "question": "What currency is specified?",
+      "expected": "USD",
+      "retrieval_pass": true,
+      "answer_pass": true,
+      "response": {
+        "answer": "USD",
+        "evidence": [
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Currency: USD.",
+            "start": 93,
+            "end": 107,
+            "retrieval_score": 0.7917970418930054
+          },
+          {
+            "source_id": "CTR-001-2",
+            "supplier_id": 1,
+            "text": "Currency: USD.",
+            "start": 93,
+            "end": 107,
+            "retrieval_score": 0.7917970418930054
+          },
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Valid from 2026-01-01 to 2027-12-31.",
+            "start": 143,
+            "end": 179,
+            "retrieval_score": 0.18494924902915955
+          }
+        ],
+        "cited_source": {
+          "source_id": "CTR-001-1",
+          "supplier_id": 1,
+          "text": "Currency: USD.",
+          "start": 93,
+          "end": 107,
+          "retrieval_score": 0.7917970418930054
+        },
+        "model": "google/flan-t5-small",
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "review_required": true,
+        "unsupported_numeric_tokens": [],
+        "validation_status": "human_review_required",
+        "limitations": "Retrieval similarity is not confidence. Numeric grounding does not establish semantic correctness. No financial calculations or awards are delegated to this model."
+      }
+    },
+    {
+      "question": "Which Incoterm is specified?",
+      "expected": "DAP",
+      "retrieval_pass": true,
+      "answer_pass": true,
+      "response": {
+        "answer": "DAP",
+        "evidence": [
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Incoterm: DAP.",
+            "start": 108,
+            "end": 122,
+            "retrieval_score": 0.5343785881996155
+          },
+          {
+            "source_id": "CTR-001-2",
+            "supplier_id": 1,
+            "text": "Incoterm: DAP.",
+            "start": 108,
+            "end": 122,
+            "retrieval_score": 0.5343785881996155
+          },
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Supplier: Aster IT Hardware.",
+            "start": 20,
+            "end": 48,
+            "retrieval_score": 0.3020188808441162
+          }
+        ],
+        "cited_source": {
+          "source_id": "CTR-001-1",
+          "supplier_id": 1,
+          "text": "Incoterm: DAP.",
+          "start": 108,
+          "end": 122,
+          "retrieval_score": 0.5343785881996155
+        },
+        "model": "google/flan-t5-small",
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "review_required": true,
+        "unsupported_numeric_tokens": [],
+        "validation_status": "human_review_required",
+        "limitations": "Retrieval similarity is not confidence. Numeric grounding does not establish semantic correctness. No financial calculations or awards are delegated to this model."
+      }
+    },
+    {
+      "question": "What service level is promised?",
+      "expected": "98",
+      "retrieval_pass": true,
+      "answer_pass": true,
+      "response": {
+        "answer": "98%",
+        "evidence": [
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Service level: 98%.",
+            "start": 123,
+            "end": 142,
+            "retrieval_score": 0.6805579662322998
+          },
+          {
+            "source_id": "CTR-001-2",
+            "supplier_id": 1,
+            "text": "Service level: 98%.",
+            "start": 123,
+            "end": 142,
+            "retrieval_score": 0.6805579662322998
+          },
+          {
+            "source_id": "CTR-001-1",
+            "supplier_id": 1,
+            "text": "Supplier: Aster IT Hardware.",
+            "start": 20,
+            "end": 48,
+            "retrieval_score": 0.2781039774417877
+          }
+        ],
+        "cited_source": {
+          "source_id": "CTR-001-1",
+          "supplier_id": 1,
+          "text": "Service level: 98%.",
+          "start": 123,
+          "end": 142,
+          "retrieval_score": 0.6805579662322998
+        },
+        "model": "google/flan-t5-small",
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "review_required": true,
+        "unsupported_numeric_tokens": [],
+        "validation_status": "human_review_required",
+        "limitations": "Retrieval similarity is not confidence. Numeric grounding does not establish semantic correctness. No financial calculations or awards are delegated to this model."
+      }
+    }
+  ],
+  "scope": "Small synthetic golden benchmark, not a real-document accuracy estimate"
+}

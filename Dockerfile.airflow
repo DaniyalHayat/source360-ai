@@ -1,0 +1,14 @@
+FROM apache/airflow:3.1.0-python3.12
+COPY --chown=airflow:root requirements.txt requirements-dev.txt /tmp/source360/
+USER root
+RUN python -m venv /opt/source360-venv && chown -R airflow:root /opt/source360-venv
+USER airflow
+RUN /opt/source360-venv/bin/pip install --no-cache-dir -r /tmp/source360/requirements-dev.txt
+COPY --chown=airflow:root . /opt/source360
+ENV PYTHONPATH=/opt/source360
+ENV AIRFLOW__CORE__DAGS_FOLDER=/opt/source360/airflow/dags
+ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
+ENV SOURCE360_DATA_DIR=/opt/source360/data
+ENV SOURCE360_PYTHON=/opt/source360-venv/bin/python
+ENV DBT_EXECUTABLE=/opt/source360-venv/bin/dbt
+WORKDIR /opt/source360

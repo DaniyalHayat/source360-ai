@@ -1,0 +1,10 @@
+{
+  "native_project": "powerbi/Source360/Source360.pbip",
+  "native_report": "powerbi/Source360/Source360.pbix",
+  "desktop_refresh_succeeded": true,
+  "executive_and_sourcing_render_verified": true,
+  "page_count": 5,
+  "embedded_data_model": true,
+  "pbix_bytes": 61854,
+  "screenshots": ["screenshots/powerbi-executive.png", "screenshots/powerbi-sourcing.png"]
+}

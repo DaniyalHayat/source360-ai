@@ -10,3 +10,4 @@ data/*.db*
 dbt/target/
 dbt/logs/
 *.log
+.pbi/

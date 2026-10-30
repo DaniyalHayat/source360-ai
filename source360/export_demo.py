@@ -42,6 +42,8 @@ def export_demo():
         "demo-adapter.js",
         "recruiter.js",
         "recruiter.css",
+        "ai-evidence.js",
+        "ai-evidence-data.json",
     ]:
         shutil.copy2(ROOT / "web" / name, assets / name)
     html = (ROOT / "web/index.html").read_text(encoding="utf-8")
@@ -54,6 +56,7 @@ def export_demo():
     html = html.replace('href="/static/style.css"', 'href="./static/style.css"')
     html = html.replace('href="/static/recruiter.css"', 'href="./static/recruiter.css"')
     html = html.replace('src="/static/recruiter.js"', 'src="./static/recruiter.js"')
+    html = html.replace('src="/static/ai-evidence.js"', 'src="./static/ai-evidence.js"')
     html = html.replace("Local decision engine", "Browser decision engine")
     html = html.replace(
         '<a href="/docs" target="_blank" rel="noopener">API reference ↗</a>',

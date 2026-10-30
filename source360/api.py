@@ -262,4 +262,22 @@ def home():
     return FileResponse(WEB / "index.html")
 
 
+class AssistantInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    question: str = Field(min_length=3, max_length=500)
+    supplier_id: int = Field(default=1, ge=1, le=60)
+
+
+@lru_cache(maxsize=1)
+def assistant_engine():
+    from extensions.rag.assistant import EvidenceAssistant
+
+    return EvidenceAssistant()
+
+
+@app.post("/api/v1/assistant/answer")
+def assistant_answer(request: AssistantInput):
+    return assistant_engine().answer(request.question, request.supplier_id)
+
+
 app.mount("/static", StaticFiles(directory=WEB), name="static")

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "allocation",
+  "position": {
+    "x": 20,
+    "y": 330,
+    "z": 0,
+    "height": 350,
+    "width": 1240,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Award"
+                    }
+                  },
+                  "Property": "Supplier"
+                }
+              },
+              "queryRef": "Award.Supplier",
+              "nativeQueryRef": "Supplier"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Award"
+                    }
+                  },
+                  "Property": "Quantity"
+                }
+              },
+              "queryRef": "Award.Quantity",
+              "nativeQueryRef": "Quantity"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Award"
+                    }
+                  },
+                  "Property": "Share"
+                }
+              },
+              "queryRef": "Award.Share",
+              "nativeQueryRef": "Share"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Award"
+                    }
+                  },
+                  "Property": "CashCost"
+                }
+              },
+              "queryRef": "Award.CashCost",
+              "nativeQueryRef": "CashCost"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Award"
+                    }
+                  },
+                  "Property": "Risk"
+                }
+              },
+              "queryRef": "Award.Risk",
+              "nativeQueryRef": "Risk"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

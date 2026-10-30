@@ -12,18 +12,35 @@ with DAG(
 
     @task
     def reconcile_sources():
-        from source360.pipeline import run_pipeline
+        import json
+        import os
+        import subprocess
+        import sys
 
-        return run_pipeline()
+        result = subprocess.run(
+            [os.getenv("SOURCE360_PYTHON", sys.executable), "-m", "source360.pipeline"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return json.loads(result.stdout)
 
     @task
     def build_governed_marts(receipt):
+        import os
         import subprocess
 
         from source360.settings import ROOT
 
         subprocess.run(
-            ["dbt", "build", "--project-dir", str(ROOT / "dbt"), "--profiles-dir", str(ROOT / "dbt")],
+            [
+                os.getenv("DBT_EXECUTABLE", "dbt"),
+                "build",
+                "--project-dir",
+                str(ROOT / "dbt"),
+                "--profiles-dir",
+                str(ROOT / "dbt"),
+            ],
             check=True,
         )
         return receipt

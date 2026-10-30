@@ -14,7 +14,8 @@ jobs:
       - run: python -m source360.pipeline
       - run: pytest -q
       - run: python -m source360.export_demo
-      - run: node --check web/app.js && node --check web/browser-engine.js
+      - run: python -m powerbi.build_project
+      - run: node --check web/app.js && node --check web/browser-engine.js && node --check web/ai-evidence.js
   postgres:
     runs-on: ubuntu-latest
     steps:
