@@ -7,6 +7,9 @@ from source360.optimization import optimize
 
 
 def evaluate_portfolio(rfqs, bid_sets, capacity_budgets=None, **params):
+    if capacity_budgets is not None:
+        from source360.joint import joint_award
+        return joint_award(rfqs, bid_sets, capacity_budgets, **params)
     ids = [r["rfq_id"] for r in rfqs]
     if len(ids) != len(set(ids)):
         raise ValueError("RFQ IDs must be unique")
@@ -45,15 +48,13 @@ def main():
     sets = {r["rfq_id"]: [{**b, "canonical_name": lookup[b["supplier_id"]]["canonical_name"],
                               "risk_score": lookup[b["supplier_id"]]["risk_score"]}
                              for b in bids if b["rfq_id"] == r["rfq_id"]] for r in rfqs}
-    budgets = {}
-    for b in bids:
-        sid = str(b["supplier_id"])
-        budgets[sid] = budgets.get(sid, 0) + b["capacity"]
-    result = evaluate_portfolio(rfqs, sets, budgets, draws=1000)
-    result["capacity_basis"] = "Synthetic assumption: event capacities are incremental and additive. Not independently confirmed supplier-wide capacity."
+    budgets = records(read('supplier_capacity'))
+    runs = records(read('pipeline_runs'))
+    snapshot = json.loads(runs[-1]['payload'])['input_snapshot_id']
+    result = evaluate_portfolio(rfqs, sets, budgets, snapshot=snapshot)
     path = Path("docs/portfolio-evaluation.json")
     path.write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
-    print(json.dumps({k:v for k,v in result.items() if k not in ("results", "supplier_usage")}))
+    print(json.dumps({k:v for k,v in result.items() if k not in ("results", "supplier_usage", "supplier_capacity")}))
 
 
 if __name__ == "__main__":

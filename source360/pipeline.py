@@ -95,7 +95,9 @@ def run_pipeline(root=DATA, db=engine):
     metrics = metrics.merge(response, on="supplier_id").merge(supplier, on="supplier_id")
     cat_totals = metrics.groupby("category_id").spend_usd.transform("sum")
     metrics["concentration"] = metrics.spend_usd / cat_totals
-    metrics["capacity_utilization"] = metrics.units / (metrics.units / 0.72)
+    capacity = pd.read_csv(raw / 'supplier_capacity.csv', dtype={'capacity_period': str})
+    metrics = metrics.merge(capacity[['supplier_id', 'capacity', 'historical_units', 'basis']], on='supplier_id', validate='one_to_one')
+    metrics["capacity_utilization"] = (metrics.historical_units / metrics.capacity.replace(0, np.nan)).fillna(0)
     components = pd.DataFrame(
         {
             "late": (1 - metrics.on_time_rate).clip(0, 1),
@@ -202,12 +204,15 @@ def run_pipeline(root=DATA, db=engine):
         "contracts": contracts,
         "rfq_bids": bids,
         "rfq_events": pd.read_csv(raw / "rfq_events.csv"),
+        "supplier_capacity": capacity,
         "market_indices": pd.read_csv(raw / "market_indices.csv"),
         "dq_results": pd.DataFrame(checks),
     }
     with db.begin() as conn:
         for name, frame in tables.items():
             frame.to_sql(name, conn, if_exists="replace", index=False, chunksize=3000)
+        from source360.warehouse import publish_warehouse
+        run['warehouse'] = publish_warehouse(clean, supplier, tables['dim_category'], snapshot, root / 'lake', conn)
         conn.execute(
             text("CREATE TABLE IF NOT EXISTS pipeline_runs (run_id TEXT PRIMARY KEY, payload TEXT NOT NULL)")
         )

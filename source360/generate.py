@@ -97,21 +97,48 @@ def generate(rows=100_000, seed=360, root=DATA):
     pd.concat([invoices, invoices.iloc[::200]], ignore_index=True).to_csv(
         raw / "ap_invoices.csv", index=False
     )
-    rfqs, bids = [], []
+    rfqs, bids, capacities = [], [], []
+    units = ['device', 'pack', 'shipment', 'item', 'hour', 'component', 'visit', 'kg', 'pack', 'service-month']
+    recent = (po.order_date >= '2025-11-01') & (po.order_date < '2026-11-01') & (po.quantity > 0) & (po.supplier_raw != 'UNMAPPED SUPPLIER')
+    supplier_units = {sid: int(po.loc[recent & (supplier == sid), 'quantity'].sum()) for sid in range(1, 61)}
+    previous = (po.order_date >= '2024-11-01') & (po.order_date < '2025-11-01') & (po.quantity > 0) & (po.supplier_raw != 'UNMAPPED SUPPLIER')
+    annual_demand, growth, baselines = {}, {}, {}
+    for c in range(10):
+        included = np.isin(supplier, [c * 6 + j + 1 for j in range(4)])
+        current_units = int(po.loc[recent & included, 'quantity'].sum())
+        previous_units = int(po.loc[previous & included, 'quantity'].sum())
+        growth[c] = min(1.15, max(.90, current_units / previous_units if previous_units else 1.))
+        annual_demand[c] = max(1, round(current_units * growth[c]))
+        weights = po.loc[recent & included, 'quantity']
+        baselines[c] = float(np.average(po.loc[recent & included, 'unit_price_local'] * fx[recent & included], weights=weights)) if current_units else BASE_PRICES[c]
+    for c in range(10):
+        for j in range(6):
+            sid = c * 6 + j + 1
+            monthly = po.loc[recent & (supplier == sid)].groupby(po.order_date.str[:7]).quantity.sum()
+            monthly = monthly.reindex(pd.date_range('2025-11-01', periods=12, freq='MS').strftime('%Y-%m'), fill_value=0)
+            peak_quarter = int(monthly.rolling(3).sum().max())
+            capacities.append(dict(supplier_id=sid, category_id=c + 1, capacity_period='2027', unit=units[c],
+                                   capacity=peak_quarter * 4, historical_units=supplier_units[sid], peak_quarter_units=peak_quarter,
+                                   annualization_factor=4, basis='Observed peak trailing-year quarter x 4; synthetic throughput proxy, not independently confirmed free capacity; renewal sourcing without external commitments'))
     for i in range(25):
         c = i % 10
-        demand = [8000, 120000, 24000, 36000, 16000, 42000, 18000, 80000, 60000, 24000][c]
+        lots = 3 if c < 5 else 2
+        lot = i // 10
+        demand = annual_demand[c] // lots + (lot < annual_demand[c] % lots)
         rid = f"RFQ-{i + 1:03}"
         rfqs.append(
             dict(
                 rfq_id=rid,
                 category_id=c + 1,
-                title=f"{CATEGORIES[c]} annual sourcing",
+                title=f"{CATEGORIES[c]} FY2027 renewal lot {lot + 1}",
                 demand=demand,
-                baseline_unit_price=round(BASE_PRICES[c] * 1.07, 4),
+                baseline_unit_price=round(baselines[c], 4),
                 issue_date="2026-10-01",
                 close_date="2026-11-15",
-                unit="EA",
+                unit=units[c],
+                capacity_period='2027',
+                demand_growth_factor=round(growth[c], 6),
+                demand_basis='Trailing-year incumbent units x observed year-over-year ratio, bounded to 0.90-1.15 as a planning guardrail; split into non-overlapping renewal lots',
             )
         )
         for j in range(4):
@@ -139,6 +166,7 @@ def generate(rows=100_000, seed=360, root=DATA):
             )
     pd.DataFrame(rfqs).to_csv(raw / "rfq_events.csv", index=False)
     pd.DataFrame(bids).to_csv(raw / "rfq_bids.csv", index=False)
+    pd.DataFrame(capacities).to_csv(raw / 'supplier_capacity.csv', index=False)
     contracts = []
     for s in suppliers:
         for v in (1, 2):

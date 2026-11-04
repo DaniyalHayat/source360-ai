@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from source360.api import ScenarioInput, category_forecast_data, overview, quality, scenario
+from source360.api import ScenarioInput, category_forecast_data, overview, quality, scenario, portfolio_scenarios, warehouse_status
 from source360.database import read
 
 ROOT = Path(__file__).resolve().parent
@@ -70,9 +70,17 @@ def build():
         columns={"month": "Month", "spend": "ExpectedSpend", "low": "Low", "high": "High"}
     )
     controls = pd.DataFrame(quality()["checks"])[["check_name", "passed", "observed", "threshold"]]
+    joint = portfolio_scenarios()
+    portfolio = pd.DataFrame([dict(Event=r['rfq_id'], Baseline=r['baseline_cost'], CashCost=r['landed_cost'],
+        ModeledSavings=r['baseline_cost']-r['landed_cost']) for r in joint['results']])
+    capacity = pd.DataFrame(joint['supplier_capacity']).rename(columns={
+        'supplier_id':'SupplierID','capacity_period':'Period','unit':'Unit','capacity':'Budget','used':'Used','slack':'Remaining'})
+    capacity = capacity[['SupplierID','Period','Unit','Budget','Used','Remaining']]
+    priorities = pd.DataFrame(warehouse_status()['categories']).rename(columns={
+        'name':'Category','spend_usd':'Spend','off_contract_usd':'OffContractReview','po_lines':'PurchaseLines','supplier_count':'Suppliers'})
     frames = {"Categories": category, "Monthly": monthly, "Suppliers": supplier,
               "Executive": executive, "Award": sourcing, "Decision": decision,
-              "Forecast": forecast, "Controls": controls}
+              "Forecast": forecast, "Controls": controls, "Portfolio":portfolio, "Capacity":capacity, "Priorities":priorities}
     tables = []
     for name, frame in frames.items():
         columns = [
@@ -153,6 +161,9 @@ def build():
         ("sourcing", "Modeled award | IT Hardware"),
         ("forecast", "IT Hardware outlook | illustrative bands"),
         ("controls", "Financial controls"),
+        ("portfolio", "25-event portfolio | synthetic shared capacity"),
+        ("capacity", "Shared annual supplier capacity | planning proxy"),
+        ("priorities", "Off-contract review | not modeled savings"),
     ]
     write(
         report / "definition/pages/pages.json",
@@ -256,6 +267,10 @@ def build():
     visual("forecast", "outlook", "lineChart", "Forecast",
            [("Category", "Month", False), ("Y", "ExpectedSpend", True),
             ("Y", "Low", True), ("Y", "High", True)], 20, 20, 1240, 660)
+    visual('portfolio','joint-awards','tableEx','Portfolio',[("Values",c,False) for c in portfolio],20,20,1240,660)
+    visual('capacity','shared-budgets','tableEx','Capacity',[("Values",c,False) for c in capacity],20,20,1240,660)
+    visual('priorities','review-exposure','clusteredBarChart','Priorities',
+        [('Category','Category',False),('Y','OffContractReview',True)],20,20,1240,660)
     print(project / "Source360.pbip")
 
 

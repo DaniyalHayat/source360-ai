@@ -1,0 +1,161 @@
+{
+  "receipt": {
+    "batch_id": "b6ea43b8bb5692ba1884b6cdbf69816069dbd9d1001e2ca2068f04821ab66056",
+    "deleted": 0,
+    "deletion_policy": "Full-source snapshots only: absent purchase-order keys produce explicit deletion log entries",
+    "input_snapshot_id": "def534ff881dbd338a39ad1c8d2f52711d5f0773afd17e1ee2b53f6f1d79cfe7",
+    "inserted": 99816,
+    "lake_bytes": 5589524,
+    "lake_manifest_sha256": "4767f3018142510bc48b70ee0e5e109d089b82e44a425c0be1a04ddbe24cdcac",
+    "lake_partitions": 36,
+    "replayed": false,
+    "rows": 99816,
+    "storage": "postgresql",
+    "synthetic": true,
+    "total_spend_usd": "261379015.768061",
+    "transaction_scope": "Dimensions, facts, correction/deletion log and publication receipt",
+    "unchanged": 0,
+    "updated": 0
+  },
+  "categories": [
+    {
+      "name": "IT Hardware",
+      "po_lines": 9934,
+      "spend_usd": 133368872.844091,
+      "off_contract_usd": 26311014.969077,
+      "supplier_count": 6
+    },
+    {
+      "name": "Professional Services",
+      "po_lines": 9862,
+      "spend_usd": 30319304.450221,
+      "off_contract_usd": 5941200.50231,
+      "supplier_count": 6
+    },
+    {
+      "name": "Telecom",
+      "po_lines": 10040,
+      "spend_usd": 24826243.231674,
+      "off_contract_usd": 5002349.910498,
+      "supplier_count": 6
+    },
+    {
+      "name": "Logistics",
+      "po_lines": 10173,
+      "spend_usd": 21649399.114397,
+      "off_contract_usd": 4438905.840107,
+      "supplier_count": 6
+    },
+    {
+      "name": "Facilities",
+      "po_lines": 9943,
+      "spend_usd": 16603290.108972,
+      "off_contract_usd": 3253302.066679,
+      "supplier_count": 6
+    },
+    {
+      "name": "Electronics",
+      "po_lines": 10105,
+      "spend_usd": 13010470.839442,
+      "off_contract_usd": 2652742.270408,
+      "supplier_count": 6
+    },
+    {
+      "name": "MRO",
+      "po_lines": 9916,
+      "spend_usd": 9003248.160035,
+      "off_contract_usd": 1744845.141943,
+      "supplier_count": 6
+    },
+    {
+      "name": "Raw Materials",
+      "po_lines": 9862,
+      "spend_usd": 6452863.682379,
+      "off_contract_usd": 1324959.173678,
+      "supplier_count": 6
+    },
+    {
+      "name": "Office Supplies",
+      "po_lines": 10027,
+      "spend_usd": 3522395.449671,
+      "off_contract_usd": 673052.819801,
+      "supplier_count": 6
+    },
+    {
+      "name": "Packaging",
+      "po_lines": 9954,
+      "spend_usd": 2622927.887179,
+      "off_contract_usd": 524246.192051,
+      "supplier_count": 6
+    }
+  ],
+  "interpretation": "Off-contract spend is an addressable review population, not a savings estimate. Historical synthetic data.",
+  "lake_verified_rows": 99816,
+  "foreign_keys": [
+    {
+      "name": "wh_purchase_orders_batch_id_fkey",
+      "constrained_columns": [
+        "batch_id"
+      ],
+      "referred_schema": null,
+      "referred_table": "wh_batches",
+      "referred_columns": [
+        "batch_id"
+      ],
+      "options": {},
+      "comment": null
+    },
+    {
+      "name": "wh_purchase_orders_category_id_fkey",
+      "constrained_columns": [
+        "category_id"
+      ],
+      "referred_schema": null,
+      "referred_table": "wh_categories",
+      "referred_columns": [
+        "category_id"
+      ],
+      "options": {},
+      "comment": null
+    },
+    {
+      "name": "wh_purchase_orders_supplier_id_fkey",
+      "constrained_columns": [
+        "supplier_id"
+      ],
+      "referred_schema": null,
+      "referred_table": "wh_suppliers",
+      "referred_columns": [
+        "supplier_id"
+      ],
+      "options": {},
+      "comment": null
+    }
+  ],
+  "indexes": [
+    {
+      "name": "wh_orders_category_date",
+      "unique": false,
+      "column_names": [
+        "category_id",
+        "order_date"
+      ],
+      "include_columns": [],
+      "dialect_options": {
+        "postgresql_include": []
+      }
+    },
+    {
+      "name": "wh_orders_supplier_date",
+      "unique": false,
+      "column_names": [
+        "supplier_id",
+        "order_date"
+      ],
+      "include_columns": [],
+      "dialect_options": {
+        "postgresql_include": []
+      }
+    }
+  ]
+}

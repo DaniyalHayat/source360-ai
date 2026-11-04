@@ -1,0 +1,27 @@
+{
+  "name": "source360-ai",
+  "version": "1.0.0",
+  "description": "Source360 AI procurement decision support",
+  "private": true,
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "vendor": "node tools/vendor_solver.mjs",
+    "test": "node --test tests/test_joint_browser.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaniyalHayat/source360-ai.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DaniyalHayat/source360-ai/issues"
+  },
+  "homepage": "https://github.com/DaniyalHayat/source360-ai#readme",
+  "dependencies": {
+    "highs": "1.15.4"
+  }
+}

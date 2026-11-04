@@ -2,13 +2,22 @@ import json
 import os
 
 import pandas as pd
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, event
 
 from source360.settings import DATABASE_URL
 
 
 def engine_for(url=DATABASE_URL):
-    return create_engine(url, connect_args={"check_same_thread": False} if url.startswith("sqlite") else {})
+    db = create_engine(url, connect_args={"check_same_thread": False} if url.startswith("sqlite") else {})
+    if db.dialect.name == 'sqlite':
+        event.listen(db, 'connect', enable_foreign_keys)
+    return db
+
+
+def enable_foreign_keys(connection, record):
+    cursor = connection.cursor()
+    cursor.execute('PRAGMA foreign_keys=ON')
+    cursor.close()
 
 
 engine = engine_for()
@@ -21,6 +30,7 @@ def read(table, db=engine):
         "fct_spend",
         "ap_invoices",
         "rfq_events",
+        "supplier_capacity",
         "rfq_bids",
         "contracts",
         "communications",

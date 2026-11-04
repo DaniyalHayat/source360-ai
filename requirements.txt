@@ -7,3 +7,4 @@ psycopg[binary]==3.2.12
 pulp==3.3.0
 scipy==1.16.3
 statsmodels==0.14.5
+pyarrow==22.0.0

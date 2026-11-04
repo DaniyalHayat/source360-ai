@@ -5,7 +5,10 @@
     "suppliers",
     "sourcing",
     "forecast",
-    "controls"
+    "controls",
+    "portfolio",
+    "capacity",
+    "priorities"
   ],
   "activePageName": "executive"
 }

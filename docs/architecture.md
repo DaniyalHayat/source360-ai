@@ -11,12 +11,12 @@ The public edition exports aggregate/scorecard/contract/bid data and forecasts f
 | Choice | Reason / boundary |
 |---|---|
 | PostgreSQL | Relational warehouse, governed SQL and local containers; SQLite is explicit portable fallback |
-| S3 | Optional immutable raw archive; local raw directory is the executed landing zone; no AWS resources provisioned |
-| PuLP/CBC | Inspectable single-item supplier allocation; no commercial solver licensing requirement |
+| S3 / Parquet | A private S3 round trip was executed and its temporary stack removed. The current local lake uses immutable monthly Parquet partitions with checksums. Source360 has no always-on paid cloud service |
+| PuLP/CBC / HiGHS | Individual-event allocation and joint 25-event sourcing with shared capacities; a browser worker solves the joint model using a pinned public WebAssembly package |
 | dbt | Independently recomputes canonical financial marts and tests against the ingestion reference |
 | Airflow | Optional scheduled batch orchestration; workflow DAG is supplied separately from the core Compose stack |
 | Figma/browser app | Recruiter-requested interactive presentation surface; full backend remains downloadable |
-| Power BI | Secondary authoring kit, no fabricated PBIX binary |
+| Power BI | Eight-page native project and refreshed PBIX, including the portfolio, shared budgets and off-contract review priorities |
 | MongoDB | Deferred: relational contracts and metadata do not justify another operational store |
 | Kafka | Deferred: nightly procurement snapshots do not require an event stream |
 | Spark/Databricks | Optional transformation adapter, not a runtime dependency at this scale |

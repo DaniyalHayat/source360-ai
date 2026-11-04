@@ -2,9 +2,21 @@
   "native_project": "powerbi/Source360/Source360.pbip",
   "native_report": "powerbi/Source360/Source360.pbix",
   "desktop_refresh_succeeded": true,
-  "executive_and_sourcing_render_verified": true,
-  "page_count": 5,
+  "joint_portfolio_render_verified": true,
+  "page_count": 8,
+  "pages": [
+    "Executive | synthetic sourcing",
+    "Supplier performance",
+    "Modeled award | IT Hardware",
+    "IT Hardware outlook | illustrative bands",
+    "Financial controls",
+    "25-event portfolio | synthetic shared capacity",
+    "Shared annual supplier capacity | planning proxy",
+    "Off-contract review | not modeled savings"
+  ],
   "embedded_data_model": true,
-  "pbix_bytes": 61854,
-  "screenshots": ["screenshots/powerbi-executive.png", "screenshots/powerbi-sourcing.png"]
+  "pbix_bytes": 83687,
+  "screenshots": [
+    "screenshots/powerbi-joint-portfolio.png"
+  ]
 }

@@ -28,3 +28,13 @@ Build Airflow with `docker build -f Dockerfile.airflow -t source360-airflow .`. 
 AWS verification is opt-in and creates then deletes its own disposable stack: set `AWS_PROFILE=source360` and run `python cloud/verify_aws.py --region us-east-2`. The $5 budget is an authorization limit, not an AWS hard billing cap; no claim of a finalized zero-dollar bill is made. The public demo runs independently of AWS and the laptop.
 
 No pre-commit configuration was present. No realized savings, real client engagement, production enterprise controls or operational AI agent is claimed.
+
+## November 4 update
+
+The current suite passes 56 Python checks and three additional HiGHS browser-solver checks. All 25 renewal lots are now solved jointly against separate shared supplier-period-unit budgets. The reproducible modeled benefit is $8.27M (15.08%), superseding the earlier independent-award total. Volumes are continuous planning quantities; operational purchasing would also need pack-size and minimum-order constraints.
+
+The full snapshot published 99,816 typed facts into PostgreSQL, with three fact foreign keys, two query indexes and 36 checksum-verified Parquet partitions. Five correction/replay/rollback/corruption/bridge cases passed on both SQLite and PostgreSQL. The application exposes SQL-derived category review priorities and the publication receipt.
+
+The native Power BI project was rebuilt, opened, refreshed and saved as an eight-page 83,687-byte PBIX. Its embedded portfolio table's aggregate cash cost and savings match the solver receipt within $0.01. Individual lot allocations can differ between equal portfolio optima. See `powerbi-verification.json`, `warehouse-verification.json`, and `portfolio-evaluation.json`.
+
+The updated static frontend was imported into a file named Source360 AI. Figma returned a successful source import, but its preview displayed connection error M8; updated Figma execution/publication is not verified. The source and local browser edition remain independently runnable. The prior published Figma site represents the earlier snapshot.

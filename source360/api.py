@@ -60,6 +60,11 @@ def categories():
     return records(table("dim_category"))
 
 
+@app.get('/api/v1/suppliers/capacities')
+def supplier_capacities():
+    return records(table('supplier_capacity'))
+
+
 @app.get("/api/v1/overview")
 def overview(category_id: int | None = None):
     spend = table("fct_spend")
@@ -122,7 +127,30 @@ def portfolio_scenarios():
     from source360.portfolio import evaluate_portfolio
     events = rfqs()
     bid_sets = {event["rfq_id"]: bid_matrix(event["rfq_id"]) for event in events}
-    return evaluate_portfolio(events, bid_sets, snapshot=latest_run()["input_snapshot_id"], draws=1000)
+    return evaluate_portfolio(events, bid_sets, records(table('supplier_capacity')), snapshot=latest_run()["input_snapshot_id"])
+
+
+class PortfolioInput(BaseModel):
+    model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
+    capacity_factor: float = Field(default=1., ge=.5, le=1.5)
+    risk_penalty: float = Field(default=100., ge=0, le=500)
+
+
+@app.get('/api/v1/portfolio/inputs')
+def portfolio_inputs():
+    events = rfqs()
+    return dict(rfqs=events, bids={r['rfq_id']:bid_matrix(r['rfq_id']) for r in events},
+        capacities=records(table('supplier_capacity')), snapshot=latest_run()['input_snapshot_id'],
+        warehouse=warehouse_status())
+
+
+@app.post('/api/v1/portfolio/scenarios')
+def portfolio_sensitivity(params: PortfolioInput):
+    from source360.portfolio import evaluate_portfolio
+    events = rfqs()
+    bid_sets = {r['rfq_id']: bid_matrix(r['rfq_id']) for r in events}
+    return evaluate_portfolio(events, bid_sets, records(table('supplier_capacity')),
+                              snapshot=latest_run()['input_snapshot_id'], **params.model_dump())
 
 
 @app.get("/api/v1/suppliers/{supplier_id}/scorecard")
@@ -218,6 +246,24 @@ def quality():
         live_age_days=max(0, int((np.datetime64("today") - np.datetime64("2026-10-30")).astype(int))),
         freshness_basis="Historical synthetic snapshot as of 2026-10-30; not a live feed",
     )
+
+
+@app.get('/api/v1/warehouse/status')
+def warehouse_status():
+    from sqlalchemy import select, func, case
+    from source360.warehouse import orders, suppliers, categories, state, batches
+    with engine.connect() as conn:
+        receipt = conn.execute(select(batches.c.receipt).join(state, batches.c.batch_id == state.c.batch_id)).scalar()
+        category = conn.execute(select(categories.c.name,
+            func.count(orders.c.po_line_id).label('po_lines'),
+            func.sum(orders.c.extended_spend_usd).label('spend_usd'),
+            func.sum(case((orders.c.off_contract_flag == 1, orders.c.extended_spend_usd), else_=0)).label('off_contract_usd'),
+            func.count(func.distinct(suppliers.c.supplier_id)).label('supplier_count'))
+            .select_from(orders.join(suppliers).join(categories, orders.c.category_id == categories.c.category_id))
+            .group_by(categories.c.name).order_by(func.sum(orders.c.extended_spend_usd).desc())).mappings().all()
+    return dict(receipt=json.loads(receipt) if receipt else None,
+        categories=[{k:float(v) if hasattr(v, 'as_tuple') else v for k,v in r.items()} for r in category],
+        interpretation='Off-contract spend is an addressable review population, not a savings estimate. Historical synthetic data.')
 
 
 @app.get("/api/v1/pipeline/runs/{run_id}")

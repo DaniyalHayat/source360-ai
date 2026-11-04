@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "joint-awards",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 0,
+    "height": 660,
+    "width": 1240,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Portfolio"
+                    }
+                  },
+                  "Property": "Event"
+                }
+              },
+              "queryRef": "Portfolio.Event",
+              "nativeQueryRef": "Event"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Portfolio"
+                    }
+                  },
+                  "Property": "Baseline"
+                }
+              },
+              "queryRef": "Portfolio.Baseline",
+              "nativeQueryRef": "Baseline"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Portfolio"
+                    }
+                  },
+                  "Property": "CashCost"
+                }
+              },
+              "queryRef": "Portfolio.CashCost",
+              "nativeQueryRef": "CashCost"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Portfolio"
+                    }
+                  },
+                  "Property": "ModeledSavings"
+                }
+              },
+              "queryRef": "Portfolio.ModeledSavings",
+              "nativeQueryRef": "ModeledSavings"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
