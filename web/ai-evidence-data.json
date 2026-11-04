@@ -19,7 +19,7 @@
             "text": "Payment terms: 30 days.",
             "start": 49,
             "end": 72,
-            "retrieval_score": 0.7259015440940857
+            "retrieval_score": 0.7259016036987305
           },
           {
             "source_id": "CTR-001-2",
@@ -27,7 +27,7 @@
             "text": "Payment terms: 45 days.",
             "start": 49,
             "end": 72,
-            "retrieval_score": 0.6967038512229919
+            "retrieval_score": 0.6967037916183472
           },
           {
             "source_id": "CTR-001-1",
@@ -35,7 +35,7 @@
             "text": "Currency: USD.",
             "start": 93,
             "end": 107,
-            "retrieval_score": 0.31946492195129395
+            "retrieval_score": 0.3194649815559387
           }
         ],
         "cited_source": {
@@ -44,7 +44,7 @@
           "text": "Payment terms: 30 days.",
           "start": 49,
           "end": 72,
-          "retrieval_score": 0.7259015440940857
+          "retrieval_score": 0.7259016036987305
         },
         "model": "google/flan-t5-small",
         "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
@@ -68,7 +68,7 @@
             "text": "Lead time: 21 days.",
             "start": 73,
             "end": 92,
-            "retrieval_score": 0.6022813320159912
+            "retrieval_score": 0.6022815704345703
           },
           {
             "source_id": "CTR-001-2",
@@ -76,7 +76,7 @@
             "text": "Lead time: 28 days.",
             "start": 73,
             "end": 92,
-            "retrieval_score": 0.5860143899917603
+            "retrieval_score": 0.5860146284103394
           },
           {
             "source_id": "CTR-001-1",
@@ -84,7 +84,7 @@
             "text": "Payment terms: 30 days.",
             "start": 49,
             "end": 72,
-            "retrieval_score": 0.28798621892929077
+            "retrieval_score": 0.28798627853393555
           }
         ],
         "cited_source": {
@@ -93,7 +93,7 @@
           "text": "Lead time: 21 days.",
           "start": 73,
           "end": 92,
-          "retrieval_score": 0.6022813320159912
+          "retrieval_score": 0.6022815704345703
         },
         "model": "google/flan-t5-small",
         "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
@@ -133,7 +133,7 @@
             "text": "Valid from 2026-01-01 to 2027-12-31.",
             "start": 143,
             "end": 179,
-            "retrieval_score": 0.18494924902915955
+            "retrieval_score": 0.18494930863380432
           }
         ],
         "cited_source": {
@@ -182,7 +182,7 @@
             "text": "Supplier: Aster IT Hardware.",
             "start": 20,
             "end": 48,
-            "retrieval_score": 0.3020188808441162
+            "retrieval_score": 0.302018940448761
           }
         ],
         "cited_source": {
@@ -231,7 +231,7 @@
             "text": "Supplier: Aster IT Hardware.",
             "start": 20,
             "end": 48,
-            "retrieval_score": 0.2781039774417877
+            "retrieval_score": 0.2781040072441101
           }
         ],
         "cited_source": {

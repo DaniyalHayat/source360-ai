@@ -6,4 +6,4 @@ API queries use bound values. Dynamic table names are allowlisted. Scenario inpu
 
 Documents are untrusted content. Their instructions are never executed. The MCP adapter exposes explicit read-only lookups with no SQL tool, external messaging or award operation. All recommendations state that human review is required. Exported JSON contains commercial assumptions and immutable snapshot IDs, not actual approvals.
 
-Optional AWS design: private S3 bucket, Block Public Access, encryption, scoped prefix access, lifecycle cleanup, account budget and usage monitoring. No free-tier entitlement or zero cloud cost is promised. Cloud provisioning and cost verification were not performed.
+AWS verification records describe an earlier disposable private S3 round trip, encryption, public-access blocking, versioning and cleanup. The public application does not depend on AWS. No new cloud resource was provisioned during the November 4 local validation; no free-tier entitlement or zero ongoing cloud cost is promised. See aws-verification.json for the historical receipt and cloud/verify_aws.py for opt-in reproduction.

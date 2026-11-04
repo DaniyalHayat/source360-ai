@@ -1,9 +1,9 @@
-fastapi==0.162.0
-uvicorn==0.54.0
-pandas==3.0.1
+fastapi==0.121.0
+uvicorn==0.38.0
+pandas==2.3.3
 numpy==2.3.5
-SQLAlchemy==2.1.6
-psycopg[binary]==3.3.6
+SQLAlchemy==2.0.44
+psycopg[binary]==3.2.12
 pulp==3.3.0
-scipy==1.18.1
-statsmodels==0.15.0
+scipy==1.16.3
+statsmodels==0.14.5

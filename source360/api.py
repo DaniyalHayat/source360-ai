@@ -24,8 +24,12 @@ app = FastAPI(
 WEB = Path(__file__).resolve().parents[1] / "web"
 
 
-@lru_cache(maxsize=24)
 def table(name):
+    return cached_table(name, latest_run()["input_snapshot_id"])
+
+
+@lru_cache(maxsize=32)
+def cached_table(name, snapshot):
     return read(name)
 
 
@@ -38,10 +42,10 @@ def find(frame, key, value):
 
 def latest_run():
     with engine.connect() as conn:
-        row = conn.execute(text("SELECT payload FROM pipeline_runs ORDER BY run_id DESC LIMIT 1")).first()
-    if not row:
+        rows = conn.execute(text("SELECT payload FROM pipeline_runs")).all()
+    if not rows:
         raise HTTPException(503, "Run the pipeline first")
-    return json.loads(row[0])
+    return max((json.loads(row[0]) for row in rows), key=lambda run: run["timestamp"])
 
 
 @app.get("/health")
@@ -93,8 +97,12 @@ def category_spend(category_id: int):
     return overview(category_id)
 
 
-@lru_cache(maxsize=10)
 def category_forecast_data(category_id):
+    return cached_forecast(category_id, latest_run()["input_snapshot_id"])
+
+
+@lru_cache(maxsize=20)
+def cached_forecast(category_id, snapshot):
     find(table("dim_category"), "category_id", category_id)
     return forecast(table("monthly_spend")[lambda f: f.category_id == category_id])
 
@@ -107,6 +115,14 @@ def category_forecast(category_id: int):
 @app.get("/api/v1/suppliers")
 def suppliers():
     return records(table("supplier_metrics").sort_values("spend_usd", ascending=False))
+
+
+@app.get("/api/v1/portfolio/scenarios")
+def portfolio_scenarios():
+    from source360.portfolio import evaluate_portfolio
+    events = rfqs()
+    bid_sets = {event["rfq_id"]: bid_matrix(event["rfq_id"]) for event in events}
+    return evaluate_portfolio(events, bid_sets, snapshot=latest_run()["input_snapshot_id"], draws=1000)
 
 
 @app.get("/api/v1/suppliers/{supplier_id}/scorecard")
@@ -268,8 +284,12 @@ class AssistantInput(BaseModel):
     supplier_id: int = Field(default=1, ge=1, le=60)
 
 
-@lru_cache(maxsize=1)
 def assistant_engine():
+    return cached_assistant(latest_run()["input_snapshot_id"])
+
+
+@lru_cache(maxsize=1)
+def cached_assistant(snapshot):
     from extensions.rag.assistant import EvidenceAssistant
 
     return EvidenceAssistant()

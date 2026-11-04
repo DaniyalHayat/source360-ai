@@ -77,3 +77,7 @@ Use **3-minute recruiter tour** in the top bar. Review source reconciliation, ru
 ## Boundaries
 
 Figma and the public browser app are the presentation surfaces. The local API supports new AI questions after installing `requirements-extensions.txt`; first use downloads the model weights. Airflow was executed as a real three-task DAG test, not left as an always-running scheduler. PySpark was executed locally, not on a hosted Databricks cluster. AWS verification deployed disposable private S3 resources and removed them; it does not host the public application. No external supplier communications or award actions exist. See `docs/verification.md` for execution receipts and reproduction commands.
+
+## November 4 implementation and validation
+
+Run `python -m source360.portfolio` after ingestion to reproduce all 25 RFQs: $91.54M baseline, $75.73M landed cost and $15.80M simulated savings (17.27%). These are summed independent awards, not a joint optimum or realized benefit. The receipt explicitly assumes event capacities are incremental. Missing supplier-wide budgets, duplicate events or breached budgets withhold aggregate savings. Forecasts now return finite horizon-specific residuals at the 24-month minimum. Snapshot keys invalidate API caches. MiniLM/FLAN-T5 inference was rerun on five synthetic questions with all retrieval and answer checks passing. No new cloud resources were provisioned.
