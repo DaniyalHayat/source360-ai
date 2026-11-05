@@ -1,10 +1,10 @@
 # Source360 AI
 
-A procurement decision platform, from source extracts to constrained supplier awards. Built by Daniyal Hayat. **All records, contracts, prices, and savings are synthetic. No realized client impact is claimed.**
+A procurement decision platform that reconciles purchase orders and invoices, compares supplier bids, and solves 25 sourcing events together under shared capacity limits. Built by Daniyal Hayat. **All records, contracts, prices, and savings are synthetic. No realized client impact is claimed.**
 
-The demo includes a guided three-minute tour, spend diagnostics, supplier scorecards, a working sourcing optimizer, three-strategy comparison, cost forecasts, source evidence, and financial controls. No account or installation is required for the public demo.
+The browser edition uses a validated snapshot derived from 100,000 synthetic purchase-order lines. Follow the three-minute tour from spend diagnostics and supplier risk through award comparisons, cost forecasts, and source evidence.
 
-[Browser demo](https://daniyalhayat.github.io/demos/source360/) · [Updated Figma workspace](https://www.figma.com/make/vVtgALgGrzPlLmAHllHJzV) · [Earlier published Figma version](https://procurement-strategic-intelligence-daniyalhayat.figma.site) · [GitHub source](https://github.com/DaniyalHayat/source360-ai)
+[Browser demo](https://daniyalhayat.github.io/demos/source360/) · [Figma presentation](https://www.figma.com/make/vVtgALgGrzPlLmAHllHJzV) · [Earlier published Figma version](https://procurement-strategic-intelligence-daniyalhayat.figma.site)
 
 ![Published Source360 Overview](docs/screenshots/source360-figma-published.jpg)
 
@@ -70,7 +70,7 @@ flowchart LR
   API --> Web[Decision cockpit]
   Solver --> Web
   API --> Snapshot[Validated synthetic browser snapshot]
-  Snapshot --> Public[Public app / standalone Figma Make app]
+  Snapshot --> Public[Browser demo / Figma presentation]
 ```
 
 The static public edition carries the same validated data and decision equations without exposing a database or requiring a running laptop. It is a portfolio demonstration, not an operational procurement service. The backend uses SQLite for zero-setup local use and PostgreSQL with independently recomputed dbt marts in Compose. See [architecture](docs/architecture.md), [metrics](docs/metric_dictionary.md), [model cards](docs/model_cards.md), and [verification](docs/verification.md).
